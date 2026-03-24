@@ -6,10 +6,12 @@ import 'bilangan_page.dart';
 import 'total_angka_page.dart';
 import 'stopwatch_page.dart';
 import 'piramid_page.dart';
-import 'login_page.dart'; 
+import 'login_page.dart';
+import 'tanggal_page.dart';
+import 'jodoh_page.dart';
 
 class HomePage extends StatelessWidget {
- const HomePage({super.key});
+  const HomePage({super.key});
 
   static const Color cutePink = Color(0xFFFFB6C1);
   static const Color softPink = Color(0xFFFFE4E1);
@@ -18,7 +20,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: softPink, 
+      backgroundColor: softPink,
       appBar: AppBar(
         title: Text(
           "Menu Utama ✨",
@@ -53,11 +55,10 @@ class HomePage extends StatelessWidget {
             SizedBox(height: 20),
             Expanded(
               child: GridView.count(
-                crossAxisCount: 2, 
+                crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
                 children: [
-                  
                   menuButton(
                     context,
                     "Data Kelompok",
@@ -94,6 +95,18 @@ class HomePage extends StatelessWidget {
                     Icons.change_history_rounded,
                     PiramidPage(),
                   ),
+                  menuButton(
+                    context,
+                    "Kalkulator Tanggal",
+                    Icons.event_note_rounded,
+                    const KalkulatorTanggalPage(),
+                  ),
+                  menuButton(
+                    context,
+                    "Cek Jodoh",
+                    Icons.favorite_rounded,
+                    const KalkulatorJodohPage(),
+                  ),
                 ],
               ),
             ),
@@ -103,7 +116,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  
   Widget menuButton(
     BuildContext context,
     String title,
@@ -120,7 +132,7 @@ class HomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
-              color: cutePink.withValues(alpha:0.3),
+              color: cutePink.withValues(alpha: 0.3),
               blurRadius: 10,
               offset: Offset(0, 5),
             ),
@@ -156,7 +168,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  
   void _showLogoutDialog(BuildContext context) {
     showDialog(
       context: context,
