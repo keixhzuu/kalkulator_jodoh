@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 
 class PiramidPage extends StatefulWidget {
   const PiramidPage({super.key});
@@ -12,9 +13,9 @@ class _PiramidPageState extends State<PiramidPage> {
   TextEditingController sisi = TextEditingController();
   TextEditingController tinggi = TextEditingController();
 
-  final Color cutePink = Color(0xFFFFB6C1);
-  final Color softPink = Color(0xFFFFE4E1);
-  final Color deepPink = Color(0xFFFF69B4);
+  final Color cutePink = const Color(0xFFFFB6C1);
+  final Color softPink = const Color(0xFFFFE4E1);
+  final Color deepPink = const Color(0xFFFF69B4);
 
   double luas = 0;
   double volume = 0;
@@ -26,7 +27,12 @@ class _PiramidPageState extends State<PiramidPage> {
 
     if (s == null || t == null) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Masukkan angka yang bener ya manis~ ✨")),
+        SnackBar(
+          content: Text(
+            "Masukkan angka yang bener ya manis~ ✨",
+            style: GoogleFonts.poppins(),
+          ),
+        ),
       );
       return;
     }
@@ -43,84 +49,90 @@ class _PiramidPageState extends State<PiramidPage> {
     return Scaffold(
       backgroundColor: softPink,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           "Bangun Piramid ✨",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
         ),
         backgroundColor: cutePink,
         centerTitle: true,
         elevation: 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25),
         child: Column(
           children: [
             // Kartu Input
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: cutePink.withValues(alpha:0.3),
+                    color: cutePink.withValues(alpha: 0.3),
                     blurRadius: 10,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),
               child: Column(
                 children: [
                   Icon(Icons.change_history_rounded, color: cutePink, size: 50),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 10),
                   Text(
                     "Masukkan ukuran piramidnya ya~",
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: Colors.brown[400],
+                      fontSize: 13,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   _buildTextField(
                     sisi,
-                    "Panjang Sisi Alas (contoh: 10.5)",
+                    "Panjang Sisi Alas",
                     Icons.square_foot_rounded,
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   _buildTextField(
                     tinggi,
-                    "Tinggi Piramid (contoh: 15.2)",
+                    "Tinggi Piramid",
                     Icons.height_rounded,
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             ElevatedButton.icon(
               onPressed: hitung,
-              icon: Icon(Icons.auto_fix_high_rounded, color: Colors.white),
+              icon: const Icon(Icons.auto_fix_high_rounded, color: Colors.white),
               label: Text(
                 "HITUNG SEKARANG ✨",
-                style: TextStyle(
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
                 ),
               ),
               style: ElevatedButton.styleFrom(
                 backgroundColor: deepPink,
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-                shape: StadiumBorder(),
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                shape: const StadiumBorder(),
                 elevation: 5,
               ),
             ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
             if (sudahHitung)
               Column(
@@ -130,7 +142,7 @@ class _PiramidPageState extends State<PiramidPage> {
                     luas.toStringAsFixed(2),
                     Icons.aspect_ratio_rounded,
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   _buildResultCard(
                     "Volume",
                     volume.toStringAsFixed(2),
@@ -144,7 +156,6 @@ class _PiramidPageState extends State<PiramidPage> {
     );
   }
 
-  
   Widget _buildTextField(
     TextEditingController controller,
     String label,
@@ -152,16 +163,17 @@ class _PiramidPageState extends State<PiramidPage> {
   ) {
     return TextField(
       controller: controller,
-      keyboardType: TextInputType.numberWithOptions(decimal: true),
+      keyboardType: const TextInputType.numberWithOptions(decimal: true),
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^\d+\.?\d*')),
       ],
+      style: GoogleFonts.poppins(fontSize: 15, fontWeight: FontWeight.w500),
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: TextStyle(color: cutePink),
+        labelStyle: GoogleFonts.poppins(color: cutePink, fontSize: 13),
         prefixIcon: Icon(icon, color: cutePink),
         filled: true,
-        fillColor: softPink.withValues(alpha:0.2),
+        fillColor: softPink.withValues(alpha: 0.2),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide.none,
@@ -173,7 +185,7 @@ class _PiramidPageState extends State<PiramidPage> {
   Widget _buildResultCard(String title, String value, IconData icon) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
@@ -185,20 +197,25 @@ class _PiramidPageState extends State<PiramidPage> {
             backgroundColor: softPink,
             child: Icon(icon, color: deepPink),
           ),
-          SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: TextStyle(color: Colors.grey, fontSize: 12)),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.brown[700],
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(color: Colors.grey[600], fontSize: 11),
                 ),
-              ),
-            ],
+                Text(
+                  value,
+                  style: GoogleFonts.poppins(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown[700],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

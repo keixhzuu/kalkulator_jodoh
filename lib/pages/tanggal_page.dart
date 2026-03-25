@@ -371,23 +371,28 @@ class _KalkulatorTanggalPageState extends State<KalkulatorTanggalPage> {
       child: Column(
         children: [
           const Text(
-            "Analisis Umur Precise",
+            "Detail Usia Saat Ini",
             style: TextStyle(fontWeight: FontWeight.bold, color: accentBrown),
           ),
-          const Divider(height: 30),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+          const SizedBox(height: 20),
+          // Menggunakan Wrap agar fleksibel di layar kecil
+          Wrap(
+            alignment: WrapAlignment.center,
+            spacing: 15,
+            runSpacing: 15,
             children: [
               _ageCircle(age['y']!, "Thn"),
               _ageCircle(age['m']!, "Bln"),
               _ageCircle(age['d']!, "Hari"),
+              _ageCircle(age['h']!, "Jam"),
+              _ageCircle(age['min']!, "Menit"),
             ],
           ),
-          const SizedBox(height: 20),
-          Text(
-            "Sudah hidup selama ${age['h']} jam dan ${age['min']} menit",
-            style: const TextStyle(
-              fontSize: 12,
+          const Divider(height: 40),
+          const Text(
+            "Dihitung berdasarkan waktu lahir",
+            style: TextStyle(
+              fontSize: 10,
               fontStyle: FontStyle.italic,
               color: Colors.grey,
             ),
@@ -398,18 +403,24 @@ class _KalkulatorTanggalPageState extends State<KalkulatorTanggalPage> {
   }
 
   Widget _ageCircle(int value, String label) {
-    return Column(
-      children: [
-        Text(
-          "$value",
-          style: const TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: deepPink,
+    return SizedBox(
+      width: 50, // Memberi lebar tetap agar rapi
+      child: Column(
+        children: [
+          Text(
+            "$value",
+            style: const TextStyle(
+              fontSize: 20, 
+              fontWeight: FontWeight.bold,
+              color: deepPink,
+            ),
           ),
-        ),
-        Text(label, style: const TextStyle(fontSize: 12, color: accentBrown)),
-      ],
+          Text(
+            label,
+            style: const TextStyle(fontSize: 11, color: accentBrown),
+          ),
+        ],
+      ),
     );
   }
 

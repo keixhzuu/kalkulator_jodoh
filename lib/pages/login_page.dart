@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Font
 import '../pages/home_page.dart'; 
 
 void main() {
@@ -22,7 +23,6 @@ class LoginController {
       return;
     }
 
-    
     if (username == "kalkulator" && password == "sugab") {
       _showSnackBar(
         context,
@@ -32,7 +32,7 @@ class LoginController {
 
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => const HomePage()),
       );
     } else {
       _showSnackBar(
@@ -46,7 +46,7 @@ class LoginController {
   void _showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(message, style: GoogleFonts.poppins()), // Font SnackBar
         backgroundColor: color,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -83,7 +83,7 @@ class LoginPage extends StatelessWidget {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: cutePink.withValues(alpha:0.4),
+                      color: cutePink.withValues(alpha: 0.4),
                       blurRadius: 20,
                       offset: const Offset(0, 8),
                     ),
@@ -94,7 +94,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
               Text(
                 "Selamat Datang!",
-                style: TextStyle(
+                style: GoogleFonts.poppins( // Ganti Font
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.brown[600],
@@ -129,16 +129,16 @@ class LoginPage extends StatelessWidget {
                     gradient: LinearGradient(colors: [cutePink, deepPink]),
                     boxShadow: [
                       BoxShadow(
-                        color: deepPink.withValues(alpha:0.3),
+                        color: deepPink.withValues(alpha: 0.3),
                         blurRadius: 10,
                         offset: const Offset(0, 5),
                       ),
                     ],
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
                       "MASUK SEKARANG",
-                      style: TextStyle(
+                      style: GoogleFonts.poppins( // Ganti Font
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.1,
@@ -165,14 +165,16 @@ class LoginPage extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
         boxShadow: [
-          BoxShadow(color: Colors.black.withValues(alpha:0.05), blurRadius: 10),
+          BoxShadow(color: Colors.black.withValues(alpha: 0.05), blurRadius: 10),
         ],
       ),
       child: TextField(
         controller: controller,
         obscureText: isPass,
+        style: GoogleFonts.poppins(), // Font input
         decoration: InputDecoration(
           hintText: hint,
+          hintStyle: GoogleFonts.poppins(color: Colors.grey[400]), // Font hint
           prefixIcon: Icon(icon, color: cutePink),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 18),

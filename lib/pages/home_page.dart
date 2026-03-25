@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 
 import 'data_kelompok_page.dart';
 import 'kalkulator_page.dart';
@@ -24,17 +25,21 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Menu Utama ✨",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins( // Ganti Font
+            color: Colors.white, 
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
         ),
         backgroundColor: cutePink,
         centerTitle: true,
         elevation: 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.logout_rounded, color: Colors.white),
+            icon: const Icon(Icons.logout_rounded, color: Colors.white),
             onPressed: () => _showLogoutDialog(context),
           ),
         ],
@@ -46,13 +51,13 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               "Pilih Menu Favoritmu:",
-              style: TextStyle(
+              style: GoogleFonts.poppins( // Ganti Font
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.brown[600],
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -73,7 +78,7 @@ class HomePage extends StatelessWidget {
                   ),
                   menuButton(
                     context,
-                    " Cek Bilangan",
+                    "Cek Bilangan",
                     Icons.numbers_rounded,
                     BilanganPage(),
                   ),
@@ -134,7 +139,7 @@ class HomePage extends StatelessWidget {
             BoxShadow(
               color: cutePink.withValues(alpha: 0.3),
               blurRadius: 10,
-              offset: Offset(0, 5),
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -142,21 +147,21 @@ class HomePage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Container(
-              padding: EdgeInsets.all(12),
-              decoration: BoxDecoration(
+              padding: const EdgeInsets.all(12),
+              decoration: const BoxDecoration(
                 color: softPink,
                 shape: BoxShape.circle,
               ),
               child: Icon(icon, size: 40, color: deepPink),
             ),
-            SizedBox(height: 12),
+            const SizedBox(height: 12),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
+                style: GoogleFonts.poppins( // Ganti Font
+                  fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: Colors.brown[700],
                 ),
@@ -173,15 +178,27 @@ class HomePage extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-        title: Text("Logout? 🥺"),
-        content: Text("Yakin mau keluar dari aplikasi imut ini?"),
+        title: Text(
+          "Logout? 🥺",
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold), // Ganti Font
+        ),
+        content: Text(
+          "Yakin mau keluar dari aplikasi imut ini?",
+          style: GoogleFonts.poppins(), // Ganti Font
+        ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("Batal"),
+            child: Text(
+              "Batal",
+              style: GoogleFonts.poppins(color: Colors.grey[600], fontWeight: FontWeight.w600),
+            ),
           ),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(backgroundColor: deepPink),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: deepPink,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            ),
             onPressed: () {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -189,7 +206,10 @@ class HomePage extends StatelessWidget {
                 (route) => false,
               );
             },
-            child: Text("Ya, Keluar", style: TextStyle(color: Colors.white)),
+            child: Text(
+              "Ya, Keluar",
+              style: GoogleFonts.poppins(color: Colors.white, fontWeight: FontWeight.bold),
+            ),
           ),
         ],
       ),

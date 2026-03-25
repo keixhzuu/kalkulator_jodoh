@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart'; // Jangan lupa import ini
 
 class BilanganPage extends StatefulWidget {
   const BilanganPage({super.key});
 
   @override
-   State<BilanganPage> createState() => _BilanganPageState();
+  State<BilanganPage> createState() => _BilanganPageState();
 }
 
 class _BilanganPageState extends State<BilanganPage> {
@@ -12,10 +13,9 @@ class _BilanganPageState extends State<BilanganPage> {
   String hasilGanjilGenap = "";
   String hasilPrima = "";
 
-  
-  final Color cutePink = Color(0xFFFFB6C1);
-  final Color softPink = Color(0xFFFFE4E1);
-  final Color deepPink = Color(0xFFFF69B4);
+  final Color cutePink = const Color(0xFFFFB6C1);
+  final Color softPink = const Color(0xFFFFE4E1);
+  final Color deepPink = const Color(0xFFFF69B4);
 
   bool isPrima(int n) {
     if (n <= 1) return false;
@@ -28,18 +28,17 @@ class _BilanganPageState extends State<BilanganPage> {
   void cekBilangan() {
     if (angka.text.isEmpty) return;
 
-    double n = double.parse(angka.text);
+    double? n = double.tryParse(angka.text);
+    if (n == null) return;
 
     setState(() {
-      if(n % 1 != 0){
+      if (n % 1 != 0) {
         hasilGanjilGenap = "Bilangan Desimal";
         hasilPrima = "Bilangan Desimal";
-
-      }else {
+      } else {
         int bil = n.toInt();
         hasilGanjilGenap = bil % 2 == 0 ? "Bilangan Genap" : "Bilangan Ganjil";
         hasilPrima = isPrima(bil) ? "Bilangan Prima" : "Bukan Prima";
-
       }
     });
   }
@@ -49,97 +48,106 @@ class _BilanganPageState extends State<BilanganPage> {
     return Scaffold(
       backgroundColor: softPink,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           "Cek Bilangan✨",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
         ),
         backgroundColor: cutePink,
         centerTitle: true,
         elevation: 0,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(25),
+        padding: const EdgeInsets.all(25),
         child: Column(
           children: [
             // Container Input
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: cutePink.withValues(alpha:0.3),
+                    color: cutePink.withValues(alpha: 0.3),
                     blurRadius: 10,
-                    offset: Offset(0, 5),
+                    offset: const Offset(0, 5),
                   ),
                 ],
               ),
               child: Column(
                 children: [
                   Icon(Icons.auto_awesome_rounded, color: cutePink, size: 40),
+                  const SizedBox(height: 10),
                   Text(
                     "Masukkan angka 💫\nCek ganjil, genap, atau prima~",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       color: Colors.brown[400],
-                      fontSize: 14,
+                      fontSize: 13,
                       fontStyle: FontStyle.italic,
                     ),
                   ),
-                  SizedBox(height: 10),
+                  const SizedBox(height: 15),
                   TextField(
                     controller: angka,
                     keyboardType: TextInputType.number,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: GoogleFonts.poppins(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.brown,
                     ),
                     decoration: InputDecoration(
                       hintText: "masukkan angka",
-                      hintStyle: TextStyle(color: cutePink.withValues(alpha:0.5)),
+                      hintStyle: GoogleFonts.poppins(
+                        color: cutePink.withValues(alpha: 0.5),
+                        fontSize: 15,
+                      ),
                       filled: true,
-                      fillColor: softPink.withValues(alpha:0.2),
+                      fillColor: softPink.withValues(alpha: 0.2),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide.none,
                       ),
-                      contentPadding: EdgeInsets.symmetric(vertical: 15),
+                      contentPadding: const EdgeInsets.symmetric(vertical: 15),
                     ),
                   ),
                 ],
               ),
             ),
 
-            SizedBox(height: 25),
+            const SizedBox(height: 25),
 
             // Tombol Cek
             ElevatedButton(
               onPressed: cekBilangan,
               style: ElevatedButton.styleFrom(
                 backgroundColor: deepPink,
-                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
-                shape: StadiumBorder(),
+                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: const StadiumBorder(),
                 elevation: 5,
               ),
               child: Text(
-                "CEK SEKARANG ",
-                style: TextStyle(
+                "CEK SEKARANG",
+                style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  letterSpacing: 1.1,
                 ),
               ),
             ),
 
-            SizedBox(height: 30),
+            const SizedBox(height: 30),
 
-            // Tampilan Hasil (Hanya muncul jika sudah ada hasil)
+            // Tampilan Hasil
             if (hasilGanjilGenap.isNotEmpty)
               Column(
                 children: [
@@ -148,7 +156,7 @@ class _BilanganPageState extends State<BilanganPage> {
                     hasilGanjilGenap,
                     Icons.looks_two_rounded,
                   ),
-                  SizedBox(height: 15),
+                  const SizedBox(height: 15),
                   _buildResultCard(
                     "Status Prima",
                     hasilPrima,
@@ -165,7 +173,7 @@ class _BilanganPageState extends State<BilanganPage> {
   Widget _buildResultCard(String title, String value, IconData icon) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.all(20),
+      padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
@@ -177,20 +185,29 @@ class _BilanganPageState extends State<BilanganPage> {
             backgroundColor: softPink,
             child: Icon(icon, color: deepPink),
           ),
-          SizedBox(width: 20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: TextStyle(color: Colors.grey, fontSize: 12)),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.brown[700],
+          const SizedBox(width: 20),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: GoogleFonts.poppins(
+                    color: Colors.grey[600],
+                    fontSize: 11,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-              ),
-            ],
+                Text(
+                  value,
+                  style: GoogleFonts.poppins(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.brown[700],
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

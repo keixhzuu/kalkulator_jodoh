@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
 
 class KalkulatorPage extends StatefulWidget {
   const KalkulatorPage({super.key});
@@ -17,7 +18,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
 
   void tekanTombol(String value) {
     setState(() {
-      // Mencegah double titik dalam satu angka
       if (value == "." && input.endsWith(".")) return;
       input += value;
     });
@@ -82,14 +82,15 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           style: ElevatedButton.styleFrom(
             backgroundColor: warna ?? cutePink,
             padding: const EdgeInsets.symmetric(vertical: 22),
+            elevation: 2,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(20),
             ),
           ),
           child: Text(
             text,
-            style: const TextStyle(
-              fontSize: 22,
+            style: GoogleFonts.poppins( // Ganti Font Tombol
+              fontSize: 20,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -121,9 +122,13 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
       backgroundColor: softPink,
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
-        title: const Text(
+        title: Text(
           "Kalkulator ✨",
-          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          style: GoogleFonts.poppins( // Ganti Font AppBar
+            color: Colors.white, 
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+          ),
         ),
         backgroundColor: cutePink,
         elevation: 0,
@@ -145,14 +150,19 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                 children: [
                   Text(
                     input,
-                    style: TextStyle(fontSize: 28, color: Colors.brown[700]),
+                    style: GoogleFonts.poppins( // Ganti Font Input
+                      fontSize: 24, 
+                      color: Colors.brown[400],
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
                     hasil,
-                    style: const TextStyle(
-                      fontSize: 42,
-                      fontWeight: FontWeight.bold,
+                    style: GoogleFonts.poppins( // Ganti Font Hasil
+                      fontSize: 48,
+                      fontWeight: FontWeight.w800, // Lebih tebal agar menonjol
+                      color: Colors.brown[800],
                     ),
                   ),
                 ],
@@ -161,12 +171,18 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           ),
           Container(
             padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(35)),
+            ),
             child: Column(
               children: [
+                const SizedBox(height: 10),
                 baris(["7", "8", "9", "C"]),
                 baris(["4", "5", "6", "DEL"]),
                 baris(["1", "2", "3", "-"]),
                 baris(["0", ".", "+", "="]),
+                const SizedBox(height: 10),
               ],
             ),
           ),
