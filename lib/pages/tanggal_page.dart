@@ -13,7 +13,6 @@ class _KalkulatorTanggalPageState extends State<KalkulatorTanggalPage> {
   DateTime? _selectedDate;
   TimeOfDay? _selectedTime;
 
-  // Palette warna disamakan dengan fitur lainnya
   static const Color deepPink = Color(0xFFFF69B4);
   static const Color softPink = Color(0xFFFFE4E1);
   static const Color cutePink = Color(0xFFFFB6C1);

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart'; 
 
 import 'data_kelompok_page.dart';
 import 'kalkulator_page.dart';
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           "Menu Utama ✨",
-          style: GoogleFonts.poppins( // Ganti Font
+          style: GoogleFonts.poppins( 
             color: Colors.white, 
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -51,7 +51,7 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               "Pilih Menu Favoritmu:",
-              style: GoogleFonts.poppins( // Ganti Font
+              style: GoogleFonts.poppins( 
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: Colors.brown[600],
@@ -160,7 +160,7 @@ class HomePage extends StatelessWidget {
               child: Text(
                 title,
                 textAlign: TextAlign.center,
-                style: GoogleFonts.poppins( // Ganti Font
+                style: GoogleFonts.poppins(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,
                   color: Colors.brown[700],
@@ -180,11 +180,11 @@ class HomePage extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         title: Text(
           "Logout? 🥺",
-          style: GoogleFonts.poppins(fontWeight: FontWeight.bold), // Ganti Font
+          style: GoogleFonts.poppins(fontWeight: FontWeight.bold), 
         ),
         content: Text(
           "Yakin mau keluar dari aplikasi imut ini?",
-          style: GoogleFonts.poppins(), // Ganti Font
+          style: GoogleFonts.poppins(), 
         ),
         actions: [
           TextButton(

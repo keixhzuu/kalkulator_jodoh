@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Font
+import 'package:google_fonts/google_fonts.dart'; 
 import '../pages/home_page.dart'; 
 
 void main() {
@@ -46,7 +46,7 @@ class LoginController {
   void _showSnackBar(BuildContext context, String message, Color color) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(message, style: GoogleFonts.poppins()), // Font SnackBar
+        content: Text(message, style: GoogleFonts.poppins()), 
         backgroundColor: color,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -60,7 +60,6 @@ class LoginPage extends StatelessWidget {
 
   final LoginController _auth = LoginController();
 
-  // Warna Tema Imut
   final Color cutePink = const Color(0xFFFFB6C1);
   final Color softPink = const Color(0xFFFFE4E1);
   final Color deepPink = const Color(0xFFFF69B4);
@@ -75,7 +74,6 @@ class LoginPage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Logo/Icon Lingkaran
               Container(
                 padding: const EdgeInsets.all(25),
                 decoration: BoxDecoration(
@@ -94,7 +92,7 @@ class LoginPage extends StatelessWidget {
               const SizedBox(height: 25),
               Text(
                 "Selamat Datang!",
-                style: GoogleFonts.poppins( // Ganti Font
+                style: GoogleFonts.poppins( 
                   fontSize: 26,
                   fontWeight: FontWeight.bold,
                   color: Colors.brown[600],
@@ -102,7 +100,6 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 40),
 
-              // Input Username
               _buildInput(
                 controller: _auth.userLogin,
                 hint: "Username",
@@ -110,7 +107,6 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 15),
 
-              // Input Password
               _buildInput(
                 controller: _auth.passLogin,
                 hint: "Password",
@@ -119,7 +115,6 @@ class LoginPage extends StatelessWidget {
               ),
               const SizedBox(height: 30),
 
-              // Tombol Login Pink Gradient
               GestureDetector(
                 onTap: () => _auth.handleLogin(context),
                 child: Container(
@@ -138,7 +133,7 @@ class LoginPage extends StatelessWidget {
                   child: Center(
                     child: Text(
                       "MASUK SEKARANG",
-                      style: GoogleFonts.poppins( // Ganti Font
+                      style: GoogleFonts.poppins( 
                         color: Colors.white,
                         fontWeight: FontWeight.bold,
                         letterSpacing: 1.1,
@@ -171,10 +166,10 @@ class LoginPage extends StatelessWidget {
       child: TextField(
         controller: controller,
         obscureText: isPass,
-        style: GoogleFonts.poppins(), // Font input
+        style: GoogleFonts.poppins(),
         decoration: InputDecoration(
           hintText: hint,
-          hintStyle: GoogleFonts.poppins(color: Colors.grey[400]), // Font hint
+          hintStyle: GoogleFonts.poppins(color: Colors.grey[400]),
           prefixIcon: Icon(icon, color: cutePink),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.symmetric(vertical: 18),

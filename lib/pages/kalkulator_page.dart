@@ -18,7 +18,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
 
   void tekanTombol(String value) {
     setState(() {
-      // Mencegah double operator di akhir
       if ((value == "+" || value == "-") && 
           input.isNotEmpty && 
           (input.endsWith("+") || input.endsWith("-"))) {
@@ -48,7 +47,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
     if (input.isEmpty) return;
 
     try {
-      // Logika Penjumlahan & Pengurangan
       String ekspresi = input.replaceAll('-', '+-');
       List<String> parts = ekspresi.split('+');
 
@@ -60,7 +58,6 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
       }
 
       setState(() {
-        // UPDATE hasil saja, input (rumus) biarkan tetap seperti apa adanya
         hasil = total % 1 == 0 ? total.toInt().toString() : total.toString();
       });
     } catch (e) {

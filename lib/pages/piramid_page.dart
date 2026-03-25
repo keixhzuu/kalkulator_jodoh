@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart'; 
 
 class PiramidPage extends StatefulWidget {
   const PiramidPage({super.key});
@@ -69,7 +69,6 @@ class _PiramidPageState extends State<PiramidPage> {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            // Kartu Input
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(

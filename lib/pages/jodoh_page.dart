@@ -12,7 +12,6 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
   DateTime? _selectedDate;
   DateTime? _partnerDate;
 
-  // Palette warna disamakan dengan Kalkulator Sugab
   final Color cutePink = const Color(0xFFFFB6C1);
   final Color softPink = const Color(0xFFFFE4E1);
   final Color deepPink = const Color(0xFFFF69B4);
@@ -64,7 +63,7 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: softPink, // Pakai warna background utama
+      backgroundColor: softPink, 
       appBar: AppBar(
         title: Text(
           "Love Compatibility ✨",
@@ -73,7 +72,7 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: cutePink, // Header disamakan dengan Kalkulator
+        backgroundColor: cutePink, 
         elevation: 0,
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),

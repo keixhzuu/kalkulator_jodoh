@@ -18,12 +18,11 @@ class _StopwatchPageState extends State<StopwatchPage> {
   final Color softPink = const Color(0xFFFFE4E1);
   final Color deepPink = const Color(0xFFFF69B4);
 
-  // LOGIKA BARU: Format Jam:Menit:Detik:MS
   String formatTime(int totalMilliseconds) {
     int hundreds = (totalMilliseconds / 10).truncate();
     int seconds = (hundreds / 100).truncate();
     int minutes = (seconds / 60).truncate();
-    int hours = (minutes / 60).truncate(); // Tambahan Jam
+    int hours = (minutes / 60).truncate(); 
 
     String hoursStr = hours.toString().padLeft(2, "0");
     String minutesStr = (minutes % 60).toString().padLeft(2, "0");
@@ -102,7 +101,7 @@ class _StopwatchPageState extends State<StopwatchPage> {
           const SizedBox(height: 40),
           Center(
             child: Container(
-              width: 270, // Sedikit diperlebar agar format HH:MM:SS:ms muat
+              width: 270,
               height: 270,
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -124,7 +123,7 @@ class _StopwatchPageState extends State<StopwatchPage> {
                   Text(
                     displayTime,
                     style: GoogleFonts.poppins(
-                      fontSize: 36, // Ukuran disesuaikan agar format jam muat rapi
+                      fontSize: 36, 
                       fontWeight: FontWeight.w800,
                       color: Colors.brown[700],
                       letterSpacing: 0.5,

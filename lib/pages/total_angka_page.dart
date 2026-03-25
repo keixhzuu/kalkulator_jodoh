@@ -26,22 +26,18 @@ class _TotalAngkaState extends State<TotalAngka> {
       return;
     }
 
-    // ERROR HANDLING: Cek jika ada karakter selain angka
     if (RegExp(r'[^0-9]').hasMatch(inputRaw)) {
       _showErrorSnackBar("Hanya boleh angka ya manis! 🌸");
-      
-      // Auto-clean: Menghapus karakter non-angka secara otomatis
+  
       String cleanText = inputRaw.replaceAll(RegExp(r'[^0-9]'), '');
       angkaController.text = cleanText;
-      
-      // Mengatur posisi kursor tetap di akhir teks
+
       angkaController.selection = TextSelection.fromPosition(
         TextPosition(offset: cleanText.length),
       );
       return;
     }
 
-    // Logika Hitung
     int sum = 0;
     for (int i = 0; i < inputRaw.length; i++) {
       sum += int.parse(inputRaw[i]);
@@ -95,7 +91,6 @@ class _TotalAngkaState extends State<TotalAngka> {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            // Container Input
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -154,7 +149,6 @@ class _TotalAngkaState extends State<TotalAngka> {
 
             const SizedBox(height: 30),
 
-            // Tampilan Hasil
             if (sudahHitung) ...[
               _buildResultCard(
                 "HASIL PENJUMLAHAN 🧸", 

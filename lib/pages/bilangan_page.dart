@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Jangan lupa import ini
+import 'package:google_fonts/google_fonts.dart';
 
 class BilanganPage extends StatefulWidget {
   const BilanganPage({super.key});
@@ -68,7 +68,6 @@ class _BilanganPageState extends State<BilanganPage> {
         padding: const EdgeInsets.all(25),
         child: Column(
           children: [
-            // Container Input
             Container(
               padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
@@ -126,7 +125,6 @@ class _BilanganPageState extends State<BilanganPage> {
 
             const SizedBox(height: 25),
 
-            // Tombol Cek
             ElevatedButton(
               onPressed: cekBilangan,
               style: ElevatedButton.styleFrom(
@@ -147,7 +145,6 @@ class _BilanganPageState extends State<BilanganPage> {
 
             const SizedBox(height: 30),
 
-            // Tampilan Hasil
             if (hasilGanjilGenap.isNotEmpty)
               Column(
                 children: [

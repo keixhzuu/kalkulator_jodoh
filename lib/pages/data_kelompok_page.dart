@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart';
 
 class DataKelompok extends StatelessWidget {
   const DataKelompok({super.key});
@@ -16,7 +16,7 @@ class DataKelompok extends StatelessWidget {
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
           "Anggota Kelompok ✨",
-          style: GoogleFonts.poppins( // Ganti Font
+          style: GoogleFonts.poppins( 
             color: Colors.white, 
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -33,14 +33,13 @@ class DataKelompok extends StatelessWidget {
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [
-            // Header Lucu
             const Icon(Icons.stars_rounded, size: 50, color: deepPink),
             const SizedBox(height: 10),
             Text(
               "Meet Our Team!",
-              style: GoogleFonts.poppins( // Ganti Font
+              style: GoogleFonts.poppins( 
                 fontSize: 22,
-                fontWeight: FontWeight.w800, // Dibuat lebih tebal agar pop
+                fontWeight: FontWeight.w800, 
                 color: Colors.brown[600],
               ),
             ),
@@ -80,13 +79,13 @@ class DataKelompok extends StatelessWidget {
             child: Icon(Icons.face_retouching_natural_rounded, color: deepPink),
           ),
           const SizedBox(width: 15),
-          Expanded( // Tambahkan Expanded agar teks panjang tidak overflow
+          Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   nama,
-                  style: GoogleFonts.poppins( // Ganti Font
+                  style: GoogleFonts.poppins( 
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                     color: Colors.brown[700],
@@ -94,7 +93,7 @@ class DataKelompok extends StatelessWidget {
                 ),
                 Text(
                   "NIM: $nim",
-                  style: GoogleFonts.poppins( // Ganti Font
+                  style: GoogleFonts.poppins(
                     fontSize: 14,
                     color: Colors.grey[600],
                     fontWeight: FontWeight.w500,
