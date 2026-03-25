@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart';
 
 class KalkulatorPage extends StatefulWidget {
   const KalkulatorPage({super.key});
@@ -9,8 +9,8 @@ class KalkulatorPage extends StatefulWidget {
 }
 
 class _KalkulatorPageState extends State<KalkulatorPage> {
-  String input = "";
-  String hasil = "0";
+  String input = ""; 
+  String hasil = "0"; 
 
   final Color cutePink = const Color(0xFFFFB6C1);
   final Color softPink = const Color(0xFFFFE4E1);
@@ -18,8 +18,14 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
 
   void tekanTombol(String value) {
     setState(() {
-      if (value == "." && input.endsWith(".")) return;
-      input += value;
+      // Mencegah double operator di akhir
+      if ((value == "+" || value == "-") && 
+          input.isNotEmpty && 
+          (input.endsWith("+") || input.endsWith("-"))) {
+        input = input.substring(0, input.length - 1) + value;
+      } else {
+        input += value;
+      }
     });
   }
 
@@ -42,19 +48,20 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
     if (input.isEmpty) return;
 
     try {
+      // Logika Penjumlahan & Pengurangan
       String ekspresi = input.replaceAll('-', '+-');
       List<String> parts = ekspresi.split('+');
 
       double total = 0;
-
       for (var part in parts) {
-        if (part.trim().isEmpty) continue;
-        total += double.parse(part.trim());
+        if (part.trim().isNotEmpty) {
+          total += double.parse(part.trim());
+        }
       }
 
       setState(() {
+        // UPDATE hasil saja, input (rumus) biarkan tetap seperti apa adanya
         hasil = total % 1 == 0 ? total.toInt().toString() : total.toString();
-        input = hasil;
       });
     } catch (e) {
       setState(() {
@@ -89,8 +96,8 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
           ),
           child: Text(
             text,
-            style: GoogleFonts.poppins( // Ganti Font Tombol
-              fontSize: 20,
+            style: GoogleFonts.poppins(
+              fontSize: 22,
               color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
@@ -123,8 +130,8 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          "Kalkulator ✨",
-          style: GoogleFonts.poppins( // Ganti Font AppBar
+          "Kalkulator Sugab ✨",
+          style: GoogleFonts.poppins(
             color: Colors.white, 
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -149,8 +156,8 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    input,
-                    style: GoogleFonts.poppins( // Ganti Font Input
+                    input.isEmpty ? "0" : input,
+                    style: GoogleFonts.poppins(
                       fontSize: 24, 
                       color: Colors.brown[400],
                       fontWeight: FontWeight.w500,
@@ -159,9 +166,9 @@ class _KalkulatorPageState extends State<KalkulatorPage> {
                   const SizedBox(height: 10),
                   Text(
                     hasil,
-                    style: GoogleFonts.poppins( // Ganti Font Hasil
+                    style: GoogleFonts.poppins(
                       fontSize: 48,
-                      fontWeight: FontWeight.w800, // Lebih tebal agar menonjol
+                      fontWeight: FontWeight.w800,
                       color: Colors.brown[800],
                     ),
                   ),
