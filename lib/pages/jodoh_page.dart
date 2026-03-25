@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart'; // Import Google Fonts
+import 'package:google_fonts/google_fonts.dart';
 
 class KalkulatorJodohPage extends StatefulWidget {
   const KalkulatorJodohPage({super.key});
@@ -12,16 +12,15 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
   DateTime? _selectedDate;
   DateTime? _partnerDate;
 
-  // Palette warna premium
-  static const Color primaryPink = Color(0xFFFF85B3);
-  static const Color secondaryPink = Color(0xFFFDE7F0);
-  static const Color darkText = Color(0xFF4A4A4A);
-  static const Color white = Colors.white;
+  // Palette warna disamakan dengan Kalkulator Sugab
+  final Color cutePink = const Color(0xFFFFB6C1);
+  final Color softPink = const Color(0xFFFFE4E1);
+  final Color deepPink = const Color(0xFFFF69B4);
+  final Color darkText = Colors.brown[800]!;
 
-  // LOGIK: Hitung Neptu Jowo
   int _calculateNeptu(DateTime date) {
-    const nHari = {1: 4, 2: 3, 3: 7, 4: 8, 5: 6, 6: 9, 7: 5}; // Sen-Min
-    const pasaran = [9, 7, 4, 8, 5]; // Pahing, Pon, Wage, Kliwon, Legi
+    const nHari = {1: 4, 2: 3, 3: 7, 4: 8, 5: 6, 6: 9, 7: 5};
+    const pasaran = [9, 7, 4, 8, 5];
 
     final start = DateTime.utc(1900, 1, 1);
     final target = DateTime.utc(date.year, date.month, date.day);
@@ -33,7 +32,6 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
     return nilaiH + nilaiP;
   }
 
-  // LOGIK: Kategori Ramalan
   String _cekCocok(int totalNeptu) {
     int hasil = totalNeptu % 8;
     switch (hasil) {
@@ -66,33 +64,34 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: secondaryPink,
+      backgroundColor: softPink, // Pakai warna background utama
       appBar: AppBar(
         title: Text(
           "Love Compatibility ✨",
-          style: GoogleFonts.poppins( // Ganti Font AppBar
-            color: darkText,
-            fontWeight: FontWeight.w800,
-            letterSpacing: 1.2,
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.transparent,
+        backgroundColor: cutePink, // Header disamakan dengan Kalkulator
         elevation: 0,
         centerTitle: true,
-        iconTheme: const IconThemeData(color: darkText),
+        iconTheme: const IconThemeData(color: Colors.white),
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
+        ),
       ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 20),
         child: Column(
           children: [
             Text(
               "Cek kecocokan wetonmu dengan si dia",
-              style: GoogleFonts.poppins(color: Colors.grey, fontSize: 13),
+              style: GoogleFonts.poppins(color: Colors.brown[400], fontSize: 13),
             ),
             const SizedBox(height: 30),
 
-            // Pembanding (Kamu vs Pasangan)
             Row(
               children: [
                 Expanded(
@@ -103,11 +102,11 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
                     true,
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Icon(
                     Icons.favorite_rounded,
-                    color: primaryPink,
+                    color: deepPink,
                     size: 30,
                   ),
                 ),
@@ -146,7 +145,7 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           builder: (context, child) {
             return Theme(
               data: Theme.of(context).copyWith(
-                colorScheme: const ColorScheme.light(primary: primaryPink),
+                colorScheme: ColorScheme.light(primary: cutePink),
               ),
               child: child!,
             );
@@ -159,13 +158,13 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
       child: Container(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         decoration: BoxDecoration(
-          color: white,
+          color: Colors.white,
           borderRadius: BorderRadius.circular(25),
           boxShadow: [
             BoxShadow(
-              color: primaryPink.withValues(alpha: 0.1),
-              blurRadius: 20,
-              offset: const Offset(0, 10),
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, 5),
             ),
           ],
         ),
@@ -173,13 +172,13 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           children: [
             CircleAvatar(
               radius: 30,
-              backgroundColor: secondaryPink,
-              child: Icon(icon, color: primaryPink, size: 35),
+              backgroundColor: softPink,
+              child: Icon(icon, color: deepPink, size: 35),
             ),
             const SizedBox(height: 15),
             Text(
               label,
-              style: GoogleFonts.poppins( // Ganti Font Label
+              style: GoogleFonts.poppins(
                 fontWeight: FontWeight.bold,
                 color: darkText,
                 fontSize: 14,
@@ -190,8 +189,8 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
               date == null
                   ? "Set Date"
                   : "${date.day}/${date.month}/${date.year}",
-              style: GoogleFonts.poppins( // Ganti Font Tanggal
-                color: date == null ? Colors.grey : primaryPink,
+              style: GoogleFonts.poppins(
+                color: date == null ? Colors.grey : deepPink,
                 fontSize: 12,
                 fontWeight: date == null ? FontWeight.normal : FontWeight.w700,
               ),
@@ -213,13 +212,13 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
       width: double.infinity,
       padding: const EdgeInsets.all(30),
       decoration: BoxDecoration(
-        color: white,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(35),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withValues(alpha: 0.03),
-            blurRadius: 30,
-            offset: const Offset(0, 15),
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 20,
+            offset: const Offset(0, 10),
           ),
         ],
       ),
@@ -228,13 +227,13 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
             decoration: BoxDecoration(
-              color: secondaryPink,
+              color: softPink,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Text(
               "Total Neptu: $total",
-              style: GoogleFonts.poppins( // Ganti Font Total Neptu
-                color: primaryPink,
+              style: GoogleFonts.poppins(
+                color: deepPink,
                 fontWeight: FontWeight.bold,
                 fontSize: 13,
               ),
@@ -243,7 +242,7 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           const SizedBox(height: 25),
           Text(
             "HASIL RAMALAN",
-            style: GoogleFonts.poppins( // Ganti Font Label Hasil
+            style: GoogleFonts.poppins(
               letterSpacing: 2,
               fontSize: 11,
               fontWeight: FontWeight.w600,
@@ -253,17 +252,17 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           const SizedBox(height: 5),
           Text(
             hasil,
-            style: GoogleFonts.poppins( // Ganti Font Nama Hasil (Pegat, Jodoh, dll)
+            style: GoogleFonts.poppins(
               fontSize: 40,
               fontWeight: FontWeight.w900,
-              color: primaryPink,
+              color: deepPink,
             ),
           ),
           const SizedBox(height: 15),
           Text(
             desc,
             textAlign: TextAlign.center,
-            style: GoogleFonts.poppins( // Ganti Font Deskripsi
+            style: GoogleFonts.poppins(
               color: darkText, 
               fontSize: 14, 
               height: 1.5,
@@ -291,7 +290,7 @@ class _KalkulatorJodohPageState extends State<KalkulatorJodohPage> {
           Icon(
             Icons.auto_awesome_outlined,
             size: 60,
-            color: primaryPink.withValues(alpha: 0.3),
+            color: deepPink.withOpacity(0.3),
           ),
           const SizedBox(height: 20),
           Text(
