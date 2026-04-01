@@ -13,6 +13,8 @@ class _StopwatchPageState extends State<StopwatchPage> {
   final Stopwatch stopwatch = Stopwatch();
   Timer? timer;
   List<String> laps = [];
+  int jamAwal = 0; 
+  late int initialOffset = jamAwal * 60 * 60 * 1000;
 
   final Color cutePink = const Color(0xFFFFB6C1);
   final Color softPink = const Color(0xFFFFE4E1);
@@ -62,7 +64,8 @@ class _StopwatchPageState extends State<StopwatchPage> {
   void lap() {
     if (stopwatch.isRunning) {
       setState(() {
-        laps.add(formatTime(stopwatch.elapsedMilliseconds));
+        // laps.add(formatTime(stopwatch.elapsedMilliseconds));
+        laps.insert(0, formatTime(stopwatch.elapsedMilliseconds + initialOffset));
       });
     }
   }
@@ -75,7 +78,9 @@ class _StopwatchPageState extends State<StopwatchPage> {
 
   @override
   Widget build(BuildContext context) {
-    String displayTime = formatTime(stopwatch.elapsedMilliseconds);
+    // String displayTime = formatTime(stopwatch.elapsedMilliseconds);
+    int initialOffset = jamAwal * 60 * 60 * 1000;
+    String displayTime = formatTime(stopwatch.elapsedMilliseconds + initialOffset);
 
     return Scaffold(
       backgroundColor: softPink,

@@ -19,51 +19,38 @@ class _TotalAngkaState extends State<TotalAngka> {
   final Color deepPink = const Color(0xFFFF69B4);
 
   void hitung() {
-    String inputRaw = angkaController.text.trim();
+    String inputRaw = angkaController.text;
 
     if (inputRaw.isEmpty) {
-      setState(() => sudahHitung = false);
+      setState(() {
+        sudahHitung = false;
+        totalJumlah = 0;
+        jumlahDigit = 0;
+      });
       return;
     }
 
-    if (RegExp(r'[^0-9]').hasMatch(inputRaw)) {
-      _showErrorSnackBar("Hanya boleh angka ya manis! 🌸");
-  
-      String cleanText = inputRaw.replaceAll(RegExp(r'[^0-9]'), '');
-      angkaController.text = cleanText;
+    String cleanNumbers = inputRaw.replaceAll(RegExp(r'[^0-9]'), '');
 
-      angkaController.selection = TextSelection.fromPosition(
-        TextPosition(offset: cleanText.length),
-      );
+    if (cleanNumbers.isEmpty) {
+      setState(() {
+        sudahHitung = false;
+        totalJumlah = 0;
+        jumlahDigit = 0;
+      });
       return;
     }
 
     int sum = 0;
-    for (int i = 0; i < inputRaw.length; i++) {
-      sum += int.parse(inputRaw[i]);
+    for (int i = 0; i < cleanNumbers.length; i++) {
+      sum += int.parse(cleanNumbers[i]);
     }
 
     setState(() {
-      jumlahDigit = inputRaw.length;
+      jumlahDigit = cleanNumbers.length;
       totalJumlah = sum;
       sudahHitung = true;
     });
-  }
-
-  void _showErrorSnackBar(String message) {
-    ScaffoldMessenger.of(context).clearSnackBars();
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: GoogleFonts.poppins(fontSize: 13, fontWeight: FontWeight.w500),
-        ),
-        backgroundColor: Colors.redAccent,
-        behavior: SnackBarBehavior.floating,
-        duration: const Duration(seconds: 2),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      ),
-    );
   }
 
   @override
