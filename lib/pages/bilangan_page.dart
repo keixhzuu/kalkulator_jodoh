@@ -12,33 +12,57 @@ class _BilanganPageState extends State<BilanganPage> {
   TextEditingController angka = TextEditingController();
   String hasilGanjilGenap = "";
   String hasilPrima = "";
+  String hasilPositifNegatif = ""; // Variabel baru
 
   final Color cutePink = const Color(0xFFFFB6C1);
   final Color softPink = const Color(0xFFFFE4E1);
   final Color deepPink = const Color(0xFFFF69B4);
 
-  bool isPrima(int n) {
-    if (n <= 1) return false;
-    for (int i = 2; i * i <= n; i++) {
-      if (n % i == 0) return false;
+  // Fungsi isPrima menggunakan BigInt agar akurat untuk angka besar
+  bool isPrima(BigInt n) {
+    if (n <= BigInt.one) return false;
+    if (n == BigInt.from(2) || n == BigInt.from(3)) return true;
+    if (n % BigInt.from(2) == BigInt.zero || n % BigInt.from(3) == BigInt.zero)
+      return false;
+
+    // Algoritma 6k +/- 1 untuk efisiensi dasar
+    for (BigInt i = BigInt.from(5); i * i <= n; i += BigInt.from(6)) {
+      if (n % i == BigInt.zero || n % (i + BigInt.from(2)) == BigInt.zero)
+        return false;
     }
     return true;
   }
 
   void cekBilangan() {
-    if (angka.text.isEmpty) return;
+    String input = angka.text.trim();
+    if (input.isEmpty) return;
 
-    double? n = double.tryParse(angka.text);
-    if (n == null) return;
+    // Gunakan BigInt untuk menghindari pembulatan otomatis pada angka > 16 digit
+    BigInt? n = BigInt.tryParse(input);
 
     setState(() {
-      if (n % 1 != 0) {
-        hasilGanjilGenap = "Bilangan Desimal";
-        hasilPrima = "Bilangan Desimal";
+      if (n == null) {
+        // Jika input bukan angka bulat (misal desimal atau teks)
+        hasilGanjilGenap = "Bukan Bulat";
+        hasilPrima = "N/A";
+        hasilPositifNegatif = "Input Tidak Valid";
       } else {
-        int bil = n.toInt();
-        hasilGanjilGenap = bil % 2 == 0 ? "Bilangan Genap" : "Bilangan Ganjil";
-        hasilPrima = isPrima(bil) ? "Bilangan Prima" : "Bukan Prima";
+        // 1. Cek Ganjil / Genap
+        hasilGanjilGenap = (n % BigInt.from(2) == BigInt.zero)
+            ? "Bilangan Genap"
+            : "Bilangan Ganjil";
+
+        // 2. Cek Prima
+        hasilPrima = isPrima(n) ? "Bilangan Prima" : "Bukan Prima";
+
+        // 3. Cek Positif / Negatif / Nol
+        if (n > BigInt.zero) {
+          hasilPositifNegatif = "Bilangan Positif";
+        } else if (n < BigInt.zero) {
+          hasilPositifNegatif = "Bilangan Negatif";
+        } else {
+          hasilPositifNegatif = "Angka Nol";
+        }
       }
     });
   }
@@ -50,7 +74,7 @@ class _BilanganPageState extends State<BilanganPage> {
       appBar: AppBar(
         iconTheme: const IconThemeData(color: Colors.white),
         title: Text(
-          "Cek Bilangan✨",
+          "Cek Bilangan Luas✨",
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -75,7 +99,7 @@ class _BilanganPageState extends State<BilanganPage> {
                 borderRadius: BorderRadius.circular(30),
                 boxShadow: [
                   BoxShadow(
-                    color: cutePink.withValues(alpha: 0.3),
+                    color: cutePink.withOpacity(0.3),
                     blurRadius: 10,
                     offset: const Offset(0, 5),
                   ),
@@ -86,7 +110,7 @@ class _BilanganPageState extends State<BilanganPage> {
                   Icon(Icons.auto_awesome_rounded, color: cutePink, size: 40),
                   const SizedBox(height: 10),
                   Text(
-                    "Masukkan angka 💫\nCek ganjil, genap, atau prima~",
+                    "Masukkan angka berapapun 💫\nSistem sekarang mendukung angka sangat besar!",
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                       color: Colors.brown[400],
@@ -97,21 +121,21 @@ class _BilanganPageState extends State<BilanganPage> {
                   const SizedBox(height: 15),
                   TextField(
                     controller: angka,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.numberWithOptions(signed: true),
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
-                      fontSize: 20,
+                      fontSize: 18,
                       fontWeight: FontWeight.bold,
                       color: Colors.brown,
                     ),
                     decoration: InputDecoration(
                       hintText: "masukkan angka",
                       hintStyle: GoogleFonts.poppins(
-                        color: cutePink.withValues(alpha: 0.5),
+                        color: cutePink.withOpacity(0.5),
                         fontSize: 15,
                       ),
                       filled: true,
-                      fillColor: softPink.withValues(alpha: 0.2),
+                      fillColor: softPink.withOpacity(0.2),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
                         borderSide: BorderSide.none,
@@ -122,14 +146,15 @@ class _BilanganPageState extends State<BilanganPage> {
                 ],
               ),
             ),
-
             const SizedBox(height: 25),
-
             ElevatedButton(
               onPressed: cekBilangan,
               style: ElevatedButton.styleFrom(
                 backgroundColor: deepPink,
-                padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 50,
+                  vertical: 15,
+                ),
                 shape: const StadiumBorder(),
                 elevation: 5,
               ),
@@ -142,12 +167,16 @@ class _BilanganPageState extends State<BilanganPage> {
                 ),
               ),
             ),
-
             const SizedBox(height: 30),
-
             if (hasilGanjilGenap.isNotEmpty)
               Column(
                 children: [
+                  _buildResultCard(
+                    "Jenis Bilangan",
+                    hasilPositifNegatif,
+                    Icons.add_circle_outline_rounded,
+                  ),
+                  const SizedBox(height: 15),
                   _buildResultCard(
                     "Status Ganjil/Genap",
                     hasilGanjilGenap,
